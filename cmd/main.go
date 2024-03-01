@@ -22,13 +22,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println(color.CyanString("Start server"))
 
 	port := ""
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Println(color.RedString("Error loading .env file"))
+		log.Println(color.RedString("Error: Can't loading .env file"))
 	} else {
 		port = os.Getenv("PORT")
 	}
@@ -40,5 +39,11 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", indexHandler)
-	http.ListenAndServe(":"+port, mux)
+
+	fmt.Println(color.GreenString("Starting server at:"))
+	fmt.Printf(color.GreenString("http://0.0.0.0:%s", port))
+
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
+		log.Fatalf("could not start server:\n\t %v", err)
+	}
 }
