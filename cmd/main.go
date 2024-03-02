@@ -37,8 +37,10 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-
 	mux.HandleFunc("/", indexHandler)
+
+	fs := http.FileServer(http.Dir("assets"))
+	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	fmt.Println(color.GreenString("Starting server at:"))
 	fmt.Printf(color.GreenString("http://0.0.0.0:%s", port))

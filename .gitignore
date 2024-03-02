@@ -21,3 +21,10 @@
 go.work
 
 .env
+
+*.txt
+*.jpg
+
+*.json
+
+index copy.html
