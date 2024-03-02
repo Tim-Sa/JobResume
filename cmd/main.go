@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +12,13 @@ import (
 	"github.com/fatih/color"
 	"github.com/joho/godotenv"
 )
+
+type JsonLoad interface{}
+
+func jsonLoad(filePath string, data JsonLoad) {
+	file, _ := ioutil.ReadFile(filePath)
+	_ = json.Unmarshal([]byte(file), data)
+}
 
 type GeneralInfo struct {
 	SNP      string `json:"SNP"`
@@ -56,7 +65,28 @@ type WorkExpiriences struct {
 	} `json:"workplaces"`
 }
 
-var startPage = template.Must(template.ParseFiles("templates/index.html"))
+func getTemplate() *template.Template {
+	generalInfo := &GeneralInfo{}
+	jsonLoad("assets/content/general_info.json", generalInfo)
+
+	educations := &Educations{}
+	jsonLoad("assets/content/education.json", educations)
+
+	contacts := &Contacts{}
+	jsonLoad("assets/content/contacts.json", contacts)
+
+	languages := &Languages{}
+	jsonLoad("assets/content/languages.json", languages)
+
+	workExpiriences := &WorkExpiriences{}
+	jsonLoad("assets/content/work_exp.json", workExpiriences)
+
+	var startPage = template.Must(template.ParseFiles("templates/index copy.html"))
+
+	return startPage
+}
+
+var startPage = getTemplate()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	err := startPage.Execute(w, nil)
@@ -67,7 +97,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
 	port := ""
 
 	err := godotenv.Load()
