@@ -27,4 +27,4 @@ go.work
 
 *.json
 
-index copy.html
+generated.html

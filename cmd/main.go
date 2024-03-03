@@ -50,27 +50,45 @@ type Languages []struct {
 	Level string `json:"level"`
 }
 
-type WorkExpiriences struct {
-	Seniority  string `json:"seniority"`
-	Workplaces []struct {
-		Organisation string `json:"organisation"`
-		Position     string `json:"position"`
-		Start        string `json:"start"`
-		End          string `json:"end"`
-		Projects     []struct {
-			Description string `json:"description"`
-			Stack       string `json:"stack"`
-			Comment     string `json:"comment"`
-		} `json:"projects"`
-	} `json:"workplaces"`
+type Projects []struct {
+	Description string `json:"description"`
+	Stack       string `json:"stack"`
+	Comment     string `json:"comment"`
 }
 
-func getTemplate() *template.Template {
+type Workplaces []struct {
+	Organisation string   `json:"organisation"`
+	Position     string   `json:"position"`
+	Start        string   `json:"start"`
+	End          string   `json:"end"`
+	Projects     Projects `json:"projects"`
+}
+
+type WorkExpiriences struct {
+	Seniority  string     `json:"seniority"`
+	Workplaces Workplaces `json:"workplaces"`
+}
+
+type Skills []struct {
+	Name  string `json:"name"`
+	Level string `json:"level"`
+}
+
+type PageContent struct {
+	GeneralInfo     GeneralInfo
+	Educations      Educations
+	Contacts        Contacts
+	Languages       Languages
+	WorkExpiriences WorkExpiriences
+	Skills          Skills
+}
+
+func getContent() PageContent {
 	generalInfo := &GeneralInfo{}
 	jsonLoad("assets/content/general_info.json", generalInfo)
 
 	educations := &Educations{}
-	jsonLoad("assets/content/education.json", educations)
+	jsonLoad("assets/content/educations.json", educations)
 
 	contacts := &Contacts{}
 	jsonLoad("assets/content/contacts.json", contacts)
@@ -81,15 +99,26 @@ func getTemplate() *template.Template {
 	workExpiriences := &WorkExpiriences{}
 	jsonLoad("assets/content/work_exp.json", workExpiriences)
 
-	var startPage = template.Must(template.ParseFiles("templates/index copy.html"))
+	skills := &Skills{}
+	jsonLoad("assets/content/skills.json", skills)
 
-	return startPage
+	pageContent := PageContent{
+		GeneralInfo:     *generalInfo,
+		Educations:      *educations,
+		Contacts:        *contacts,
+		Languages:       *languages,
+		WorkExpiriences: *workExpiriences,
+		Skills:          *skills,
+	}
+
+	return pageContent
 }
 
-var startPage = getTemplate()
+var startPage = template.Must(template.ParseFiles("templates/index.html"))
+var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	err := startPage.Execute(w, nil)
+	err := startPage.Execute(w, pageContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -39,7 +39,7 @@
           <section class="section_left">
             <center>
               <img src="assets/images/portrait.jpg" alt="AUTHOR">
-              <h2 class="title">Резюме / {{ position }}</h2>
+              <h2 class="title">Резюме / {{ .GeneralInfo.Position }}</h2>
             </center>
             <hr>
             </hr>
@@ -47,43 +47,43 @@
             <h5 class="sub-title">КОНТАКТЫ</h5>
             <ul>
               <li>
-                <i class="fa fa-phone"></i> {{ phone }}
+                <i class="fa fa-phone"></i> {{ .Contacts.Phone }}
               </li>
               <li>
-                <i class="fa fa-envelope"></i> {{ email }}
+                <i class="fa fa-envelope"></i> {{ .Contacts.Email }}
               </li>
               <li>
-                <i class="fa fa-github"></i> <a href="{{ github_link }}" 
+                <i class="fa fa-github"></i> <a href="{{ .Contacts.GithubLink }}" 
                                               target="_blank">
                                                     <b>Мой github</b>
                                             </a>
               </li>
               <li>
-                <i class="fa fa-map-marker"></i> {{ city }}, {{ country }}
+                <i class="fa fa-map-marker"></i> {{ .Contacts.City }}, {{ .Contacts.Country }}
               </li>
               <li>
-                <i class="fa fa-share"></i> Готовность к переезду: <b>{{ relocation }}</b>
+                <i class="fa fa-share"></i> Готовность к переезду: <b>{{ .Contacts.Relocation }}</b>
               </li>
-              <ul>
+            </ul>
 
                 <h5 class="sub-title">ОБРАЗОВАНИЕ</h5>
 
-                {{ range $education := . }}
+                {{ range .Educations }}
 
-                    <em>{{ $education.type }}</em>
-                    <p>{{ $education.organisation }}, 
-                      {{ $education.grad }} - {{ $education.start }}/{{ $education.end }}, 
-                      {{ $education.department }}</p>
+                    <em>{{ .Type }}</em>
+                    <p>{{ .Organisation }}, 
+                      {{ .Grad }} - {{ .Start }}/{{ .End }}, 
+                      {{ .Department }}</p>
 
                 {{ end }}
 
                 <h5 class="sub-title">Языки</h5>
 
-                {{ range $language := . }}
+                {{ range .Languages }}
 
-                    <label>{{ $language.name }}</label>
+                    <label>{{ .Name }}</label>
                     <div class="progress_container">
-                      <div class="progress_bar" style="width: {{ $language.level }}}%"></div>
+                      <div class="progress_bar" style="width: {{ .Level }}%"></div>
 
                     </div>
                 {{ end }}
@@ -92,29 +92,30 @@
           <section class="section_right">
 
 
+
             <h1 class="title">О себе</h1>
-            <p><span class="tab"></span> {{ about_self }} </p>
+            <p><span class="tab"></span> {{ .GeneralInfo.About }} </p>
 
 
-            <h1 class="title">Опыт работы: {{ seniority }}</h1>
+            <h1 class="title">Опыт работы: {{ .WorkExpiriences.Seniority }}</h1>
 
-            {{ range $workplace := . }}
+            {{ range .WorkExpiriences.Workplaces }}
 
-                <h5 class="sub-title"> {{ $workplace.position }} , {{ $workplace.organisation }}</h5>
+                <h5 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h5>
                 <div class="accordion">
-                  <button type="button" class="accordion-btn" data-target="{{ $workplace.id }}" >Подробнее</button>
+                  <button type="button" class="accordion-btn" data-target="{{ .Organisation }}{{ .Position }}" >Подробнее</button>
                   
-                  <div id="{{ $workplace.id }}"  class="accordion-content">
-                      {{ range $workplace.project := .}}
+                  <div id="{{ .Organisation }}{{ .Position }}"  class="accordion-content">
+                      {{ range .Projects }}
 
-                          <p><span class="tab"></span> {{ $workplace.project.description }}
-                            <b>Стек: {{ $workplace.project.stack }}</b> {{ $workplace.project.comment }} </p>
+                          <p><span class="tab"></span> {{ .Description }}
+                            <b>Стек: {{ .Stack }}</b> {{ .Comment }} </p>
 
                       {{ end }}
                   </div>
 
                 </div>   
-                <em style="float:right;">{{$workplace.start}} / {{$workplace.end}}</em>     
+                <em style="float:right;">{{ .Start }} / {{ .End }}</em>     
 
             {{ end }}  
 
@@ -122,13 +123,13 @@
             <h1 class="title">Навыки</h1>
 
             <table>
-              {{ range $skill := .}}
+              {{ range .Skills }}
                   
                   <tr>
-                    <td>{{ $skill.name }}</td>
+                    <td>{{ .Name }}</td>
                     <td>
                       <div class="progress_container">
-                        <div class="progress_bar" style="width: {{ $skill.level }} %"></div>
+                        <div class="progress_bar" style="width: {{ .Level }}%"></div>
                       </div>
                     </td>
                   </tr>
