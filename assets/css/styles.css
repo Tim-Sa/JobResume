@@ -40,8 +40,8 @@
         background-color: transparent; 
         font-size: 0.7em; 
         text-transform: uppercase;
-        color: #3399ff;
-        border: 1.5px solid #3399ff;
+        color: #21de79;
+        border: 1.5px solid #21de79;
         margin-bottom: 1rem; 
     }
 
@@ -60,7 +60,7 @@
     width:100%;
     }
     i{
-    color:#3399ff;
+    color:#21de79;
     margin:0 5px;
     }
     li{
@@ -83,14 +83,14 @@
     letter-spacing:0.08em;
     }
     em{
-    color:#3399ff;
+    color:#21de79;
     font-weight:700;
     font-size:0.8em;
     display:block;
     font-style:normal;
     }
     label{
-    color:#3399ff;
+    color:#21de79;
     font-weight:700;
     font-size:0.8em;
     display:block;
@@ -142,7 +142,7 @@
     }
     
     .container .progress_container .progress_bar{
-    background:#3399ff;
+    background:#21de79;
     border-radius:20px;
     height:10px;
     }

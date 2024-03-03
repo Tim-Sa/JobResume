@@ -13,6 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+var jsonPath = "assets/content_examples/"
+
 type JsonLoad interface{}
 
 func jsonLoad(filePath string, data JsonLoad) {
@@ -85,22 +87,22 @@ type PageContent struct {
 
 func getContent() PageContent {
 	generalInfo := &GeneralInfo{}
-	jsonLoad("assets/content/general_info.json", generalInfo)
+	jsonLoad(jsonPath+"general_info.json", generalInfo)
 
 	educations := &Educations{}
-	jsonLoad("assets/content/educations.json", educations)
+	jsonLoad(jsonPath+"educations.json", educations)
 
 	contacts := &Contacts{}
-	jsonLoad("assets/content/contacts.json", contacts)
+	jsonLoad(jsonPath+"contacts.json", contacts)
 
 	languages := &Languages{}
-	jsonLoad("assets/content/languages.json", languages)
+	jsonLoad(jsonPath+"languages.json", languages)
 
 	workExpiriences := &WorkExpiriences{}
-	jsonLoad("assets/content/work_exp.json", workExpiriences)
+	jsonLoad(jsonPath+"work_exp.json", workExpiriences)
 
 	skills := &Skills{}
-	jsonLoad("assets/content/skills.json", skills)
+	jsonLoad(jsonPath+"skills.json", skills)
 
 	pageContent := PageContent{
 		GeneralInfo:     *generalInfo,

@@ -23,8 +23,7 @@ go.work
 .env
 
 *.txt
-*.jpg
+portrait.jpg
 
-*.json
-
+content/
 generated.html
