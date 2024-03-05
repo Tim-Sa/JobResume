@@ -117,13 +117,25 @@ func getContent() PageContent {
 }
 
 var startPage = template.Must(template.ParseFiles("templates/index.html"))
+var pdfPage = template.Must(template.ParseFiles("templates/to_pdf.html"))
 var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
-	log.Printf("\nGet request from: %s\n", r.RemoteAddr)
+	log.Printf("\nGet request to start page from: %s\n", r.RemoteAddr)
 
 	err := startPage.Execute(w, pageContent)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func pdfHandler(w http.ResponseWriter, r *http.Request) {
+
+	log.Printf("\nGet request to pdf page from: %s\n", r.RemoteAddr)
+
+	err := pdfPage.Execute(w, pageContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -146,6 +158,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)
+	mux.HandleFunc("/pdf", pdfHandler)
 
 	fs := http.FileServer(http.Dir("assets"))
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))

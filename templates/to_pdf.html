@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <!--TITLE-->
+        <title>Summary</title>
+
+        <!--ICON-->
+        <link rel="shortcut icon" href="images/logo.png">
+
+        <!--META TAGS-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <meta name="author" content="Tim">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="Summary" />
+
+        <!--GOOGLE FONTS-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
+
+        <!--PLUGIN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+        <!--FONT AWESOME-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!--EXTERNAL CSS-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+      </head>
+      <body>
+        <div class="container">
+          <section class="section_left">
+            <center>
+              <img src="assets/images/portrait_example.png" alt="AUTHOR">
+              <h2 class="title">Резюме / {{ .GeneralInfo.Position }}</h2>
+              <p>{{ .GeneralInfo.SNP }}</p>
+            </center>
+            <hr>
+            </hr>
+
+            <h5 class="sub-title">КОНТАКТЫ</h5>
+            <ul>
+              <li>
+                <i class="fa fa-phone"></i> {{ .Contacts.Phone }}
+              </li>
+              <li>
+                <i class="fa fa-telegram"></i> <b>{{ .Contacts.Telegram }}</b>
+              </li>
+              <li>
+                <i class="fa fa-envelope"></i> {{ .Contacts.Email }}
+              </li>
+              <li>
+                <i class="fa fa-github"></i>  <b>{{ .Contacts.GithubLink }}</b>
+              </li>
+              <li>
+                <i class="fa fa-map-marker"></i> {{ .Contacts.City }}, {{ .Contacts.Country }}
+              </li>
+              <li>
+                <i class="fa fa-share"></i> Готовность к переезду: <b>{{ .Contacts.Relocation }}</b>
+              </li>
+            </ul>
+
+                <h5 class="sub-title">ОБРАЗОВАНИЕ</h5>
+
+                {{ range .Educations }}
+
+                    <em>{{ .Type }}</em>
+                    <p>{{ .Organisation }}, 
+                      {{ .Grad }} - {{ .Start }}/{{ .End }}, 
+                      {{ .Department }}</p>
+
+                {{ end }}
+
+                <h5 class="sub-title">Языки</h5>
+
+                {{ range .Languages }}
+
+                    <label>{{ .Name }}</label>
+                    <div class="progress_container">
+                      <div class="progress_bar" style="width: {{ .Level }}%"></div>
+
+                    </div>
+                {{ end }}
+          <p> <br/><br/><br/></p>
+          </section>
+          <section class="section_right">
+
+
+
+            <h1 class="title">О себе</h1>
+            <p><span class="tab"></span> {{ .GeneralInfo.About }} </p>
+
+            <h1 class="title">Навыки</h1>            
+            <table>
+              {{ range .Skills }}
+                  
+                  <tr>
+                    <td>{{ .Name }}</td>
+                    <td>
+                      <div class="progress_container">
+                        <div class="progress_bar" style="width: {{ .Level }}%"></div>
+                      </div>
+                    </td>
+                  </tr>
+
+              {{ end }}
+            </table>
+
+            <h1 class="title">Опыт работы: {{ .WorkExpiriences.Seniority }}</h1>
+
+            {{ range .WorkExpiriences.Workplaces }}
+
+                <h5 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h5>
+                <em style="float:left;">{{ .Start }} / {{ .End }}</em>  
+                      {{ range .Projects }}
+                          <p></br></p>
+                          <p><span class="tab"></span> {{ .Description }}
+                            <p><b>Стек: {{ .Stack }}</b></p> {{ .Comment }} </p>
+
+                      {{ end }}
+            {{ end }}  
+
+
+
+
+
+          </section>
+        </div>
+      </body>
+    </html>
