@@ -32,14 +32,15 @@
 
         <!--EXTERNAL CSS-->
         <link rel="stylesheet" href="assets/css/styles.css">
-      </head>
 
+      </head>
       <body>
         <div class="container">
           <section class="section_left">
             <center>
               <img src="assets/images/portrait_example.png" alt="AUTHOR">
               <h2 class="title">Резюме / {{ .GeneralInfo.Position }}</h2>
+              <p>{{ .GeneralInfo.SNP }}</p>
             </center>
             <hr>
             </hr>
@@ -48,6 +49,12 @@
             <ul>
               <li>
                 <i class="fa fa-phone"></i> {{ .Contacts.Phone }}
+              </li>
+              <li>
+                <i class="fa fa-telegram"></i> <a href="{{ .Contacts.Telegram }}" 
+                                              target="_blank">
+                                                    <b>Телеграм</b>
+                                            </a>
               </li>
               <li>
                 <i class="fa fa-envelope"></i> {{ .Contacts.Email }}
@@ -87,7 +94,7 @@
 
                     </div>
                 {{ end }}
-
+          <p> <br/><br/><br/></p>
           </section>
           <section class="section_right">
 
@@ -107,9 +114,9 @@
                   
                   <div id="{{ .Organisation }}{{ .Position }}"  class="accordion-content">
                       {{ range .Projects }}
-
+                          <p></br></p>
                           <p><span class="tab"></span> {{ .Description }}
-                            <b>Стек: {{ .Stack }}</b> {{ .Comment }} </p>
+                            <p><b>Стек: {{ .Stack }}</b></p> {{ .Comment }} </p>
 
                       {{ end }}
                   </div>
