@@ -13,7 +13,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var jsonPath = "assets/content_examples/"
+var jsonPath = "assets/content/"
 
 type JsonLoad interface{}
 
@@ -24,7 +24,6 @@ func jsonLoad(filePath string, data JsonLoad) {
 
 type GeneralInfo struct {
 	SNP      string `json:"SNP"`
-	Birthday string `json:"birthday"`
 	About    string `json:"about"`
 	Position string `json:"position"`
 }
@@ -40,6 +39,7 @@ type Educations []struct {
 
 type Contacts struct {
 	Phone      string `json:"phone"`
+	Telegram   string `json:"telegram"`
 	Email      string `json:"email"`
 	GithubLink string `json:"github_link"`
 	City       string `json:"city"`
@@ -120,6 +120,9 @@ var startPage = template.Must(template.ParseFiles("templates/index.html"))
 var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+
+	log.Printf("\nGet request from: %s\n", r.RemoteAddr)
+
 	err := startPage.Execute(w, pageContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

@@ -1,18 +1,18 @@
 [
     {
         "type" : "Высшее техническое",
-        "organisation" : "Мой ВУЗ",
+        "organisation" : "МГППУ",
         "grad" : "магистратура",
-        "start" : "2004",
-        "end" : "2006",
+        "start" : "2020",
+        "end" : "2022",
         "department" : "Факультет ИТ"
     },
     {
         "type" : "Неполное высшее",
-        "organisation" : "Мой ВУЗ",
+        "organisation" : "МГППУ",
         "grad" : "бакалавриат",
-        "start" : "2000",
-        "end" : "2004",
+        "start" : "2016",
+        "end" : "2020",
         "department" : "Факультет ИТ"
     }
 ]

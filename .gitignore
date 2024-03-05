@@ -21,9 +21,4 @@
 go.work
 
 .env
-
-*.txt
-portrait.jpg
-
-content/
-generated.html
+pdf.html

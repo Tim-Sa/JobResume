@@ -1,0 +1,32 @@
+[
+    {
+        "name" : "Python: OOP, Frameworks, Code structure",
+        "level" : "85"
+    },
+    {
+        "name" : "Web: FastAPI, Aiohttp, Asyncio",
+        "level" : "68"
+    }, 
+    {
+        "name" : "Data processing: Numpy, Scipy, Pandas, Visualisation, Dask, Spark",
+        "level" : "70"
+    },
+    {
+        "name": "Databases: PostreSQL, Redis, SQL",
+        "level": "68"
+    },
+    {
+        "name": "Linux: Bash, OS structure",
+        "level": "58"
+    },
+    {
+        "name": "Docker: Registries, Image deploy",
+        "level": "35"
+    }
+    ,
+    {
+        "name": "Git, Github, Github.Actions",
+        "level": "35"
+    }
+]    
+ 
