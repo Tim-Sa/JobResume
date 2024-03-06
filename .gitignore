@@ -21,6 +21,6 @@
 go.work
 
 .env
-pdf.html
-portrait.jpg
+
+assets/images/portrait.jpg
 content/
