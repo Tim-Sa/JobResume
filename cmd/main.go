@@ -24,8 +24,11 @@ func jsonLoad(filePath string, data JsonLoad) {
 
 type GeneralInfo struct {
 	SNP      string `json:"SNP"`
-	About    string `json:"about"`
 	Position string `json:"position"`
+}
+
+type Summary []struct {
+	Paragraph string `json:"paragraph"`
 }
 
 type Educations []struct {
@@ -78,6 +81,7 @@ type Skills []struct {
 
 type PageContent struct {
 	GeneralInfo     GeneralInfo
+	Summary         Summary
 	Educations      Educations
 	Contacts        Contacts
 	Languages       Languages
@@ -104,6 +108,9 @@ func getContent() PageContent {
 	skills := &Skills{}
 	jsonLoad(jsonPath+"skills.json", skills)
 
+	summary := &Summary{}
+	jsonLoad(jsonPath+"summary.json", summary)
+
 	pageContent := PageContent{
 		GeneralInfo:     *generalInfo,
 		Educations:      *educations,
@@ -111,6 +118,7 @@ func getContent() PageContent {
 		Languages:       *languages,
 		WorkExpiriences: *workExpiriences,
 		Skills:          *skills,
+		Summary:         *summary,
 	}
 
 	return pageContent
@@ -122,7 +130,11 @@ var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
+<<<<<<< HEAD
 	log.Printf("\nGet request to start page from: %s\n", r.RemoteAddr)
+=======
+	log.Printf("\nStart Page GET request from: %s\n", r.RemoteAddr)
+>>>>>>> personal_summary
 
 	err := startPage.Execute(w, pageContent)
 	if err != nil {
@@ -133,7 +145,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func pdfHandler(w http.ResponseWriter, r *http.Request) {
 
+<<<<<<< HEAD
 	log.Printf("\nGet request to pdf page from: %s\n", r.RemoteAddr)
+=======
+	log.Printf("\nPdf Page GET request from: %s\n", r.RemoteAddr)
+>>>>>>> personal_summary
 
 	err := pdfPage.Execute(w, pageContent)
 	if err != nil {

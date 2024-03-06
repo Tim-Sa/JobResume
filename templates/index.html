@@ -101,14 +101,17 @@
 
 
             <h1 class="title">О себе</h1>
-            <p><span class="tab"></span> {{ .GeneralInfo.About }} </p>
-
+            <p>
+                {{ range .Summary }}
+                    </br><span class="tab"></span> {{ .Paragraph }} 
+                {{ end }}
+            </p>
 
             <h1 class="title">Опыт работы: {{ .WorkExpiriences.Seniority }}</h1>
 
             {{ range .WorkExpiriences.Workplaces }}
 
-                <h5 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h5>
+                <h3 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h3>
                 <div class="accordion">
                   <button type="button" class="accordion-btn" data-target="{{ .Organisation }}{{ .Position }}" >Подробнее</button>
                   
