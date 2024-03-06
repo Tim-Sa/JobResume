@@ -32,8 +32,8 @@
 
         <!--EXTERNAL CSS-->
         <link rel="stylesheet" href="assets/css/styles.css">
-      </head>
 
+      </head>
       <body>
         <div class="container">
           <section class="section_left">
@@ -51,19 +51,13 @@
                 <i class="fa fa-phone"></i> {{ .Contacts.Phone }}
               </li>
               <li>
-                <i class="fa fa-telegram"></i> <a href="{{ .Contacts.Telegram }}" 
-                                              target="_blank">
-                                                    <b>Телеграм</b>
-                                            </a>
+                <i class="fa fa-telegram"></i> <b>{{ .Contacts.Telegram }}</b>
               </li>
               <li>
                 <i class="fa fa-envelope"></i> {{ .Contacts.Email }}
               </li>
               <li>
-                <i class="fa fa-github"></i> <a href="{{ .Contacts.GithubLink }}" 
-                                              target="_blank">
-                                                    <b>Мой github</b>
-                                            </a>
+                <i class="fa fa-github"></i>  <b>{{ .Contacts.GithubLink }}</b>
               </li>
               <li>
                 <i class="fa fa-map-marker"></i> {{ .Contacts.City }}, {{ .Contacts.Country }}
@@ -107,31 +101,7 @@
                 {{ end }}
             </p>
 
-            <h1 class="title">Опыт работы: {{ .WorkExpiriences.Seniority }}</h1>
-
-            {{ range .WorkExpiriences.Workplaces }}
-
-                <h3 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h3>
-                <div class="accordion">
-                  <button type="button" class="accordion-btn" data-target="{{ .Organisation }}{{ .Position }}" >Подробнее</button>
-                  
-                  <div id="{{ .Organisation }}{{ .Position }}"  class="accordion-content">
-                      {{ range .Projects }}
-                          <p></br></p>
-                          <p><span class="tab"></span> {{ .Description }}
-                            <p><b>Стек: {{ .Stack }}</b></p> {{ .Comment }} </p>
-
-                      {{ end }}
-                  </div>
-
-                </div>   
-                <em style="float:right;">{{ .Start }} / {{ .End }}</em>     
-
-            {{ end }}  
-
-
-            <h1 class="title">Навыки</h1>
-
+            <h1 class="title">Навыки</h1>            
             <table>
               {{ range .Skills }}
                   
@@ -146,34 +116,23 @@
 
               {{ end }}
             </table>
+
+            <h1 class="title">Опыт работы: {{ .WorkExpiriences.Seniority }}</h1>
+
+            {{ range .WorkExpiriences.Workplaces }}
+
+                <h5 class="sub-title"> {{ .Position }}, {{ .Organisation }}</h5>
+                <em style="float:left;">{{ .Start }} / {{ .End }}</em>  
+                      {{ range .Projects }}
+                          <p></br></p>
+                          <p><span class="tab"></span> {{ .Description }}
+                            <p><b>Стек: {{ .Stack }}</b></p> {{ .Comment }} </p>
+
+                      {{ end }}
+                      <p></br><hr></p>
+            {{ end }}  
+
           </section>
         </div>
-
-
-        <script>
-          function btnActivation(btn) {
-              var targetId = btn.getAttribute('data-target');
-              var content = document.getElementById(targetId);
-
-              if (content.style.display === 'none' || content.style.display === '') {
-                  content.style.display = 'block';
-                  btn.textContent = 'Скрыть';
-              } else {
-                  content.style.display = 'none';
-                  btn.textContent = 'Подробнее';
-              }
-          }
-
-          var btns = document.querySelectorAll('.accordion-btn');
-
-          btns.forEach(function(btn) {
-              btn.addEventListener('click', function() {
-                  btnActivation(btn);
-              });
-          });
-
-      </script>
-
-
       </body>
     </html>

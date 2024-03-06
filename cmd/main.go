@@ -24,8 +24,11 @@ func jsonLoad(filePath string, data JsonLoad) {
 
 type GeneralInfo struct {
 	SNP      string `json:"SNP"`
-	About    string `json:"about"`
 	Position string `json:"position"`
+}
+
+type Summary []struct {
+	Paragraph string `json:"paragraph"`
 }
 
 type Educations []struct {
@@ -78,6 +81,7 @@ type Skills []struct {
 
 type PageContent struct {
 	GeneralInfo     GeneralInfo
+	Summary         Summary
 	Educations      Educations
 	Contacts        Contacts
 	Languages       Languages
@@ -104,6 +108,9 @@ func getContent() PageContent {
 	skills := &Skills{}
 	jsonLoad(jsonPath+"skills.json", skills)
 
+	summary := &Summary{}
+	jsonLoad(jsonPath+"summary.json", summary)
+
 	pageContent := PageContent{
 		GeneralInfo:     *generalInfo,
 		Educations:      *educations,
@@ -111,19 +118,32 @@ func getContent() PageContent {
 		Languages:       *languages,
 		WorkExpiriences: *workExpiriences,
 		Skills:          *skills,
+		Summary:         *summary,
 	}
 
 	return pageContent
 }
 
 var startPage = template.Must(template.ParseFiles("templates/index.html"))
+var pdfPage = template.Must(template.ParseFiles("templates/to_pdf.html"))
 var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
-	log.Printf("\nGet request from: %s\n", r.RemoteAddr)
+	log.Printf("\nStart Page GET request from: %s\n", r.RemoteAddr)
 
 	err := startPage.Execute(w, pageContent)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func pdfHandler(w http.ResponseWriter, r *http.Request) {
+
+	log.Printf("\nPdf Page GET request from: %s\n", r.RemoteAddr)
+
+	err := pdfPage.Execute(w, pageContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -146,6 +166,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)
+	mux.HandleFunc("/pdf", pdfHandler)
 
 	fs := http.FileServer(http.Dir("assets"))
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))

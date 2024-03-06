@@ -107,10 +107,9 @@
     font-weight:700;
     }
     .sub-title{
-    font-size:1em;
-    font-weight:400;
-    color:gray;
-    line-height:1em;
+    font-size:1.6em;
+    font-weight:550;
+    color:grey;
     }
     
 
@@ -122,6 +121,7 @@
     
     .container .section_left{
     width:25%;
+    height: 100%;
     padding:20px;
     background: #1b2631 ;
     color:#fff;
