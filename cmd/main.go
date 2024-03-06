@@ -129,12 +129,7 @@ var pdfPage = template.Must(template.ParseFiles("templates/to_pdf.html"))
 var pageContent = getContent()
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-
-<<<<<<< HEAD
-	log.Printf("\nGet request to start page from: %s\n", r.RemoteAddr)
-=======
 	log.Printf("\nStart Page GET request from: %s\n", r.RemoteAddr)
->>>>>>> personal_summary
 
 	err := startPage.Execute(w, pageContent)
 	if err != nil {
@@ -144,12 +139,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func pdfHandler(w http.ResponseWriter, r *http.Request) {
-
-<<<<<<< HEAD
-	log.Printf("\nGet request to pdf page from: %s\n", r.RemoteAddr)
-=======
 	log.Printf("\nPdf Page GET request from: %s\n", r.RemoteAddr)
->>>>>>> personal_summary
 
 	err := pdfPage.Execute(w, pageContent)
 	if err != nil {
