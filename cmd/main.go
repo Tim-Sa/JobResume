@@ -14,6 +14,7 @@ import (
 )
 
 var jsonPath = "assets/content_examples/"
+var portraitPath = "assets/images/portrait_example.png"
 
 type JsonLoad interface{}
 
@@ -87,6 +88,7 @@ type PageContent struct {
 	Languages       Languages
 	WorkExpiriences WorkExpiriences
 	Skills          Skills
+	PortraitPath    string
 }
 
 func getContent() PageContent {
@@ -119,6 +121,7 @@ func getContent() PageContent {
 		WorkExpiriences: *workExpiriences,
 		Skills:          *skills,
 		Summary:         *summary,
+		PortraitPath:    portraitPath,
 	}
 
 	return pageContent
