@@ -21,5 +21,6 @@
 go.work
 
 .env
-portrait.jpg
+
+assets/images/portrait.jpg
 content/
