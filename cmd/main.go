@@ -10,11 +10,22 @@ import (
 	"os"
 
 	"github.com/fatih/color"
+	"github.com/gookit/config/v2"
+	"github.com/gookit/config/v2/yaml"
 	"github.com/joho/godotenv"
 )
 
-var jsonPath = "assets/content_examples/"
-var portraitPath = "assets/images/portrait_example.png"
+func getConfig(path string) map[string]any {
+	config.AddDriver(yaml.Driver)
+	err := config.LoadFiles(path)
+	if err != nil {
+		panic(err)
+	}
+	configData := config.Data()
+	log.Printf(color.CyanString("Configuration: \n %#v\n"), configData)
+
+	return configData
+}
 
 type JsonLoad interface{}
 
@@ -92,6 +103,10 @@ type PageContent struct {
 }
 
 func getContent() PageContent {
+	contentConfig := getConfig("content_config.yaml")
+	jsonPath := fmt.Sprintf("%v", contentConfig["content_path"])
+	portraitPath := fmt.Sprintf("%v", contentConfig["portrait_path"])
+
 	generalInfo := &GeneralInfo{}
 	jsonLoad(jsonPath+"general_info.json", generalInfo)
 
