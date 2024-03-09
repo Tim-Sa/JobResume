@@ -22,5 +22,7 @@ go.work
 
 .env
 
-assets/images/portrait.jpg
-content/
+# assets/images/portrait.jpg
+# content/
+
+bin/
