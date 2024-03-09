@@ -24,3 +24,5 @@ go.work
 
 assets/images/portrait.jpg
 content/
+
+bin/
