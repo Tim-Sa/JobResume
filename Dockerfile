@@ -14,6 +14,5 @@ COPY --from=builder /github.com/Tim-Sa/JobResume/source/bin/resume .
 COPY --from=builder /github.com/Tim-Sa/JobResume/source/templates ./templates
 COPY --from=builder /github.com/Tim-Sa/JobResume/source/assets ./assets
 COPY --from=builder /github.com/Tim-Sa/JobResume/source/content_config.yaml .
-COPY --from=builder /github.com/Tim-Sa/JobResume/source/.env .
 
 CMD [ "./resume" ]

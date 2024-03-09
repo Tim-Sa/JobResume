@@ -36,7 +36,7 @@ jobs:
   deploy-image:
     runs-on: ubuntu-22.04
     needs: image-build-and-push
-    
+
     steps:
       - name: Deploy to Selectel Cloud via SSH action
         uses: appleboy/ssh-action@v1.0.0
@@ -51,4 +51,4 @@ jobs:
             docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
             docker stop $CONTAINER_NAME
             docker rm $CONTAINER_NAME
-            docker run -d -p 54322:49999 --name $CONTAINER_NAME -t $REGISTRY/$IMAGE_NAME:$TAG_NAME
+            docker run -d -p 54322:4999 --name $CONTAINER_NAME -t $REGISTRY/$IMAGE_NAME:$TAG_NAME
