@@ -1,5 +1,9 @@
 [
     {
+        "name" : "Go: gRPC, Code structure",
+        "level" : "35"
+    },
+    {
         "name" : "Python: OOP, Frameworks, Code structure",
         "level" : "85"
     },
